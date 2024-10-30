@@ -2,36 +2,35 @@ import axios from "axios";
 import { createContext, useState } from "react";
 
 const RecipeContext = createContext();
-
-export const FEATURED_CATEGORY = [
+const FEATURED_CATEGORY = [
     'Pork',
     'Beef',
-    'salmon',
-    'chicken'
-]
+    'Lamb',
+    'Chicken'
+];
 
 const RecipeContextProvider = ({children}) =>{
     const [ recipe, setRecipe ] = useState([]);
+    const [ favourite, setFavourite ] = useState([]);
 
-    const fetchRecipe  = async () => {
-        const promises = FEATURED_CATEGORY.map(async (category) =>{
-            const res = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-            return res;
-        });
-        const data  = await Promise.all(promises);
-        setRecipe(data);
+    const fetchRecipe  = async (data) => {
+            const res = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${data}`);
+            setRecipe(res.data.meals);
     }
 
-    const fetchRecipeByCategory = async (recipe) =>{
-        console.log('loading');
-
-        const res = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${recipe}`);
-        console.log('loaded');
-
+    const fetchRecipeByCategory = async (recipeCategory) =>{
+        const res = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${recipeCategory}`);
         setRecipe(res.data.meals);
     }
 
-    return <RecipeContext.Provider value={{recipe, fetchRecipe, fetchRecipeByCategory}}>
+    const addToFavourite = (favItem) =>{
+      
+        const availble = favourite.some((fav) => fav.idMeal === favItem.idMeal );
+        availble || setFavourite([...favourite, favItem]);
+        
+    }
+
+    return <RecipeContext.Provider value={{recipe, favourite, fetchRecipe, fetchRecipeByCategory, addToFavourite }}>
         {children}
     </RecipeContext.Provider>
 };
