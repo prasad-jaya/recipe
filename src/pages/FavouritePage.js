@@ -7,8 +7,6 @@ const FavouritePage = () =>{
 
     const { favourite } = useContext(RecipeContext);
 
-    console.log(favourite);
-
     return (
         <div className="container mx-auto px-20 pt-12">
             <Header/>

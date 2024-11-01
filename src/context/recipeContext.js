@@ -23,18 +23,16 @@ const RecipeContextProvider = ({children}) =>{
         setRecipe(res.data.meals);
     }
 
-    const addToFavourite = (favItem) =>{
-      
-        const availble = favourite.some((fav) => fav.idMeal === favItem.idMeal );
-        availble || setFavourite([...favourite, favItem]);
-        
+    const toggleFavourite = (favItem) =>{
+        favourite.some((fav) =>fav.idMeal === favItem.idMeal)
+        ? setFavourite(favourite.filter((fav) => fav.idMeal !== favItem.idMeal)) 
+        : setFavourite([...favourite, favItem]); 
     }
 
-    return <RecipeContext.Provider value={{recipe, favourite, fetchRecipe, fetchRecipeByCategory, addToFavourite }}>
+    return <RecipeContext.Provider value={{recipe, favourite, fetchRecipe, fetchRecipeByCategory, toggleFavourite }}>
         {children}
     </RecipeContext.Provider>
 };
-
 
 export { RecipeContextProvider };
 export default RecipeContext;

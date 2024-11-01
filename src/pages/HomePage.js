@@ -12,7 +12,6 @@ const FEATURED_CATEGORY = [
 
 const HomePage = () =>{
     const {recipe, fetchRecipeByCategory, fetchRecipe} = useContext(RecipeContext);
-
     useEffect(()=>{
         fetchRecipe('Pork');
     },[])
