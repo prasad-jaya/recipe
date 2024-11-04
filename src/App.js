@@ -1,14 +1,16 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/router";
 import { RecipeContextProvider } from "./context/recipeContext";
+import { AuthProvider } from "./auth/AuthProvider";
 
 
 const App = () =>{
     return (
-        <RecipeContextProvider >
-            <RouterProvider router={router}/>
-        </RecipeContextProvider>
-
+        <AuthProvider>
+            <RecipeContextProvider >
+                <RouterProvider router={router}/>
+            </RecipeContextProvider>
+        </AuthProvider>
     )
 }
 
