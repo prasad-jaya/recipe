@@ -2,12 +2,6 @@ import axios from "axios";
 import { createContext, useState } from "react";
 
 const RecipeContext = createContext();
-const FEATURED_CATEGORY = [
-    'Pork',
-    'Beef',
-    'Lamb',
-    'Chicken'
-];
 
 const RecipeContextProvider = ({children}) =>{
     const [ recipe, setRecipe ] = useState([]);

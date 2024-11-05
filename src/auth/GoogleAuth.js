@@ -22,7 +22,11 @@ const GoogleAuth  = () =>{
                     setIsSignedIn(auth.isSignedIn.get());
                     auth.isSignedIn.listen(onAuthChange);
                 })
-            })  
+            });
+            
+            if(isSignedIn){
+              navigate('/home');
+            }
     },[isSignedIn]);
 
     const onAuthChange = () =>{
