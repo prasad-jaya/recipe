@@ -12,10 +12,11 @@ const FEATURED_CATEGORY = [
 ];
 
 const HomePage = () =>{
+    //CONTEXT
     const {recipe, fetchRecipeByCategory, fetchRecipe} = useContext(RecipeContext);
 
     const [active, setActive] = useState('Pork');
-    const {data, error, isLoading} = useFetchRecipeQuery(active);
+    const {data, error, isLoading, refetch } = useFetchRecipeQuery(active);
     console.log(data);
     useEffect(()=>{
         //fetchRecipe('Pork');
